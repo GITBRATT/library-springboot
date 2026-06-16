@@ -1,26 +1,45 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Библиотек</title>
+    <title>Библиотека</title>
 
-    <link rel="stylesheet" href="/css/books.css">
+    <link rel="stylesheet"
+          th:href="@{/css/books.css}">
 </head>
+
 <body>
-    <h1>Список книг</h1>
 
-    <div class="book-card">
-        <h2>Чистый код</h2>
-        <p>Автор: Роберт Мартин</p>
-        <p>Год: 2008</p>
-        <button>Подробнее</button>
-    </div>
+<h1>Список книг</h1>
 
-    <div class="book-card">
-        <h2>Effective Java</h2>
-        <p>Автор: Joshua Bloch</p>
-        <p>Год: 2018</p>
-        <button>Подробнее</button>
-    </div>
+<div class="book-card"
+     th:each="book : ${books}">
+
+    <h2 th:text="${book.title}">
+        Название книги
+    </h2>
+
+    <p>
+        Автор:
+        <span th:text="${book.author}">
+            Автор
+        </span>
+    </p>
+
+    <p>
+        Год:
+        <span th:text="${book.publicationYear}">
+            2000
+        </span>
+    </p>
+
+    <a th:href="@{/books/{id}(id=${book.id})}">
+        Подробнее
+    </a>
+
+</div>
+
 </body>
 </html>

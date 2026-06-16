@@ -1,4 +1,4 @@
-package com.springboot.spring_boot_pet;
+package com.spring_boot_pet;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
