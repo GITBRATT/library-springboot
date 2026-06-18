@@ -1,45 +1,37 @@
 <!DOCTYPE html>
-<html lang="ru"
-      xmlns:th="http://www.thymeleaf.org">
-
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Библиотека</title>
-
-    <link rel="stylesheet"
-          th:href="@{/css/books.css}">
+    <link rel="stylesheet" th:href="@{/css/books.css}">
 </head>
-
 <body>
+<div class="container">
 
-<h1>Список книг</h1>
+    <h1>Библиотека</h1>
+    <p class="subtitle">Список всех книг</p>
 
-<div class="book-card"
-     th:each="book : ${books}">
+    <div class="top-bar">
+        <a th:href="@{/library/add}" class="add-btn">+ Добавить книгу</a>
+    </div>
 
-    <h2 th:text="${book.title}">
-        Название книги
-    </h2>
+    <div class="book-card" th:each="book : ${books}">
+        <h2 th:text="${book.title}">Название книги</h2>
 
-    <p>
-        Автор:
-        <span th:text="${book.author}">
-            Автор
-        </span>
-    </p>
+        <div class="book-meta">
+            <span><strong>Автор:</strong> <span th:text="${book.author}">Автор</span></span>
+            <span><strong>Год:</strong> <span th:text="${book.publicationYear}">2000</span></span>
+        </div>
 
-    <p>
-        Год:
-        <span th:text="${book.publicationYear}">
-            2000
-        </span>
-    </p>
-
-    <a th:href="@{/books/{id}(id=${book.id})}">
-        Подробнее
-    </a>
+        <div class="actions">
+            <a th:href="@{/library/{id}(id=${book.id})}" class="btn btn-secondary">Подробнее</a>
+            <a th:href="@{/library/{id}/edit(id=${book.id})}" class="btn btn-primary">Редактировать</a>
+            <form th:action="@{/library/{id}/delete(id=${book.id})}" method="post">
+                <button type="submit" class="btn btn-danger">Удалить</button>
+            </form>
+        </div>
+    </div>
 
 </div>
-
 </body>
 </html>

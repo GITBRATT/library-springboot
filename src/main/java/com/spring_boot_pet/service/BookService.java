@@ -23,4 +23,13 @@ public class BookService {
                 new RuntimeException("Book not found")
         );
     }
+
+    public void deleteById(Long id) {
+        bookRepository.deleteById(id);
+    }
+
+    public BookEntity save(BookEntity book) {
+        return bookRepository.save(book);
+    }
+
 }

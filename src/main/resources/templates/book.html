@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Книга</title>
+    <title th:text="${book.title}">Книга</title>
+    <link rel="stylesheet" th:href="@{/css/books.css}">
 </head>
 <body>
-    
+<div class="container">
+
+    <div class="book-detail">
+        <h1 th:text="${book.title}">Название</h1>
+
+        <div class="book-meta">
+            <span><strong>Автор:</strong> <span th:text="${book.author}">Автор</span></span>
+            <span><strong>Год:</strong> <span th:text="${book.publicationYear}">2000</span></span>
+        </div>
+
+        <div class="actions">
+            <a th:href="@{/library/{id}/edit(id=${book.id})}" class="btn btn-primary">Редактировать</a>
+            <form th:action="@{/library/{id}/delete(id=${book.id})}" method="post">
+                <button type="submit" class="btn btn-danger">Удалить</button>
+            </form>
+            <a th:href="@{/library}" class="btn btn-secondary">← Назад</a>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>
