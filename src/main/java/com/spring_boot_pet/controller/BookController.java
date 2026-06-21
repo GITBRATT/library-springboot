@@ -2,8 +2,10 @@ package com.spring_boot_pet.controller;
 
 import com.spring_boot_pet.model.BookEntity;
 import com.spring_boot_pet.service.BookService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -39,7 +41,10 @@ public class BookController
     }
 
     @PostMapping("/add")
-    public String addBook(@ModelAttribute BookEntity book) {
+    public String addBook(@Valid @ModelAttribute("book") BookEntity book, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "book-form";
+        }
         bookService.save(book);
         return "redirect:/library";
     }
@@ -50,16 +55,16 @@ public class BookController
         return "book-form";
     }
 
-//    @PostMapping("/{id}/edit")
-//    public String updateBook(@PathVariable Long id, @ModelAttribute BookEntity book) {
-//        book.setId(id);
-//        bookService.save(book);
-//        return "redirect:/library";
-//    }
-//
-//    @PostMapping("/{id}/delete")
-//    public String deleteBook(@PathVariable Long id) {
-//        bookService.deleteById(id);
-//        return "redirect:/library";
-//    }
+    @PostMapping("/{id}/edit")
+    public String updateBook(@PathVariable Long id, @ModelAttribute BookEntity book) {
+        book.setId(id);
+        bookService.save(book);
+        return "redirect:/library";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String deleteBook(@PathVariable Long id) {
+        bookService.deleteById(id);
+        return "redirect:/library";
+    }
 }

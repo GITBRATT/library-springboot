@@ -3,7 +3,8 @@
     "allow": [
       "Bash(find D:/Project/spring-boot-pet -type d ! -path */target/* ! -path */.idea/*)",
       "Bash(./mvnw -q compile)",
-      "Bash(javap -p target/classes/com/spring_boot_pet/model/BookEntity.class)"
+      "Bash(javap -p target/classes/com/spring_boot_pet/model/BookEntity.class)",
+      "Bash(./mvnw -q -DskipTests package)"
     ]
   }
 }

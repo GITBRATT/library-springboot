@@ -280,6 +280,10 @@ h1 {
     background: #4338ca;
 }
 
+.error{
+    color: #e54646;
+}
+
 /* =========================
    MOBILE
 ========================= */
@@ -306,4 +310,6 @@ h1 {
     .top-bar {
         justify-content: center;
     }
+
+
 }

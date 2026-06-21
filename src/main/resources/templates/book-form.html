@@ -2,33 +2,36 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${book.id} ? 'Редактировать книгу' : 'Добавить книгу'">Книга</title>
+    <title th:text="${book.id != null} ? 'Редактировать книгу' : 'Добавить книгу'">Книга</title>
     <link rel="stylesheet" th:href="@{/css/books.css}">
 </head>
 <body>
 <div class="container">
 
-    <h1 th:text="${book.id} ? 'Редактировать книгу' : 'Добавить книгу'">Книга</h1>
+    <h1 th:text="${book.id != null} ? 'Редактировать книгу' : 'Добавить книгу'">Книга</h1>
     <p class="subtitle" th:text="${book.id} ? 'Измените данные книги' : 'Заполните данные новой книги'">Форма</p>
 
     <form class="form-card"
-          th:action="${book.id} ? @{/library/{id}/edit(id=${book.id})} : @{/library/add}"
+          th:action="${book.id != null} ? @{/library/{id}/edit(id=${book.id})} : @{/library/add}"
           th:object="${book}"
           method="post">
 
         <div>
             <label for="title">Название</label>
             <input id="title" type="text" th:field="*{title}" placeholder="Введите название книги"/>
+            <span class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
         </div>
 
         <div>
             <label for="author">Автор</label>
             <input id="author" type="text" th:field="*{author}" placeholder="Введите имя автора"/>
+            <span class="error" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
         </div>
 
         <div>
             <label for="publicationYear">Год издания</label>
             <input id="publicationYear" type="number" th:field="*{publicationYear}" placeholder="2024"/>
+            <span class="error" th:if="${#fields.hasErrors('publicationYear')}" th:errors="*{publicationYear}"></span>
         </div>
 
         <div class="actions">
