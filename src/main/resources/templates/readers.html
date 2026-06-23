@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Читатели</title>
+    <link rel="stylesheet" th:href="@{/css/books.css}">
+</head>
+<body>
+<div class="container">
+
+    <nav class="nav-bar">
+        <a th:href="@{/library}" class="btn btn-secondary">Книги</a>
+        <a th:href="@{/readers}" class="btn btn-secondary">Читатели</a>
+        <a th:href="@{/loans}" class="btn btn-secondary">Выдачи</a>
+    </nav>
+
+    <h1>Читатели</h1>
+    <p class="subtitle">Список всех читателей</p>
+
+    <div class="top-bar">
+        <a th:href="@{/readers/add}" class="add-btn">+ Добавить читателя</a>
+    </div>
+
+    <div class="book-card" th:each="reader : ${readers}">
+        <h2 th:text="${reader.fullName}">Имя читателя</h2>
+
+        <div class="book-meta">
+            <span><strong>Книг на руках:</strong> <span th:text="${reader.loans.size()}">0</span></span>
+        </div>
+
+        <div class="actions">
+            <a th:href="@{/readers/{id}(id=${reader.id})}" class="btn btn-secondary">Подробнее</a>
+            <a th:href="@{/readers/{id}/edit(id=${reader.id})}" class="btn btn-primary">Редактировать</a>
+            <form th:action="@{/readers/{id}/delete(id=${reader.id})}" method="post">
+                <button type="submit" class="btn btn-danger">Удалить</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

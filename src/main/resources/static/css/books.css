@@ -45,6 +45,16 @@ h1 {
 }
 
 /* =========================
+   NAV BAR
+========================= */
+.nav-bar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+/* =========================
    TOP BAR
 ========================= */
 .top-bar {
@@ -238,7 +248,8 @@ h1 {
 }
 
 .form-card input[type="text"],
-.form-card input[type="number"] {
+.form-card input[type="number"],
+.form-card select {
     width: 100%;
 
     padding: 12px 14px;
@@ -248,10 +259,13 @@ h1 {
 
     font-size: 1rem;
 
+    background: white;
+
     transition: 0.2s;
 }
 
-.form-card input:focus {
+.form-card input:focus,
+.form-card select:focus {
     outline: none;
     border-color: #4f46e5;
 

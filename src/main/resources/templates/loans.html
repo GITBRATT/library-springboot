@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Выдачи</title>
+    <link rel="stylesheet" th:href="@{/css/books.css}">
+</head>
+<body>
+<div class="container">
+
+    <nav class="nav-bar">
+        <a th:href="@{/library}" class="btn btn-secondary">Книги</a>
+        <a th:href="@{/readers}" class="btn btn-secondary">Читатели</a>
+        <a th:href="@{/loans}" class="btn btn-secondary">Выдачи</a>
+    </nav>
+
+    <h1>Выдачи</h1>
+    <p class="subtitle">Список всех выдач книг</p>
+
+    <div class="top-bar">
+        <a th:href="@{/loans/add}" class="add-btn">+ Выдать книгу</a>
+    </div>
+
+    <div class="book-card" th:each="loan : ${loans}">
+        <h2 th:text="${loan.book.title}">Книга</h2>
+
+        <div class="book-meta">
+            <span><strong>Читатель:</strong> <span th:text="${loan.reader.fullName}">Читатель</span></span>
+            <span><strong>Выдана:</strong> <span th:text="${loan.loanDate}">—</span></span>
+            <span><strong>Вернуть до:</strong> <span th:text="${loan.dueDate}">—</span></span>
+            <span th:if="${loan.returnedDate == null}"><strong>Статус:</strong> на руках</span>
+            <span th:if="${loan.returnedDate != null}"><strong>Возвращена:</strong> <span th:text="${loan.returnedDate}">—</span></span>
+        </div>
+
+        <div class="actions">
+            <form th:if="${loan.returnedDate == null}" th:action="@{/loans/{id}/return(id=${loan.id})}" method="post">
+                <button type="submit" class="btn btn-primary">Вернуть</button>
+            </form>
+            <form th:action="@{/loans/{id}/delete(id=${loan.id})}" method="post">
+                <button type="submit" class="btn btn-danger">Удалить</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

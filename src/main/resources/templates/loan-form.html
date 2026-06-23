@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Выдать книгу</title>
+    <link rel="stylesheet" th:href="@{/css/books.css}">
+</head>
+<body>
+<div class="container">
+
+    <h1>Выдать книгу</h1>
+    <p class="subtitle">Выберите книгу и читателя</p>
+
+    <form class="form-card" th:action="@{/loans/add}" method="post">
+
+        <div>
+            <label for="bookId">Книга</label>
+            <select id="bookId" name="bookId">
+                <option th:each="book : ${books}"
+                        th:value="${book.id}"
+                        th:text="${book.title} + ' — ' + ${book.author}">Книга</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="readerId">Читатель</label>
+            <select id="readerId" name="readerId">
+                <option th:each="reader : ${readers}"
+                        th:value="${reader.id}"
+                        th:text="${reader.fullName}">Читатель</option>
+            </select>
+        </div>
+
+        <div class="actions">
+            <button type="submit">Выдать</button>
+            <a th:href="@{/loans}" class="btn btn-secondary">Отмена</a>
+        </div>
+
+    </form>
+
+</div>
+</body>
+</html>
