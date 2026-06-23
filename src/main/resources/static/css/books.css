@@ -249,6 +249,7 @@ h1 {
 
 .form-card input[type="text"],
 .form-card input[type="number"],
+.form-card input[type="password"],
 .form-card select {
     width: 100%;
 
